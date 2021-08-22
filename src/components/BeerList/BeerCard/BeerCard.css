@@ -1,0 +1,13 @@
+.list_card{
+  display: flex;
+  flex-direction: column;
+}
+
+.list_card_img{
+  height:250px;
+}
+
+.list_card_img_container{
+  display: flex;
+  justify-content: center;
+}
