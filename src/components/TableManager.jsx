@@ -2,12 +2,24 @@ import React, { useEffect, useState } from "react";
 import BeerList from "./BeerList/BeerList";
 import SearchField from "./Search/SearchField";
 import Filters from "./Filters/Filters";
-import PaginationFooter from "./Pagination/PaginationFooter";
 import BackendProvider from "../utils/BackendProvider";
+import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const backendProvider = new BackendProvider("https://api.punkapi.com/v2/");
 
+const useStyles = makeStyles({
+  wrapperTable: {
+    display: "grid",
+    gridTemplateColumns: "1fr 5fr",
+    gridColumnGap: "60px",
+    margin: "100px 0px 10px 20px",
+    height: "100%",
+  },
+});
+
 export default function TableManager() {
+  const classes = useStyles();
   const [filteredData, setFilteredData] = useState([]);
   const [pageData, setPageData] = useState([]);
   const [searchField, setSearchField] = useState("");
@@ -29,6 +41,7 @@ export default function TableManager() {
   function handleChangeSearchField(value) {
     setSearchField(value.trim());
   }
+
   useEffect(() => {
     setPageNumber(1);
     backendProvider.getBeersByName(searchField).then((beers) => {
@@ -51,20 +64,29 @@ export default function TableManager() {
   }, [pageNumber, pageSize, filteredData]);
 
   return (
-    <div>
+    <Grid container spacing={1} className={classes.app}>
       <SearchField
         onFilterData={handleChangeSearchField}
         searchField={searchField}
       />
-      <Filters submitFilters={submitFilters} />
-      <BeerList beers={pageData} />
-      <PaginationFooter
-        onChangePageSize={setPageSize}
-        onChangePageNumber={setPageNumber}
-        pageSize={pageSize}
-        pageNumber={pageNumber}
-        max_pages={max_pages}
-      />
-    </div>
+      <Grid container direction="column" className={classes.wrapperTable}>
+        <Filters
+          onChangePageSize={setPageSize}
+          onChangePageNumber={setPageNumber}
+          pageSize={pageSize}
+          pageNumber={pageNumber}
+          submitFilters={submitFilters}
+          className={classes.table_filters}
+        />
+        <Grid container item xs={12} spacing={3}>
+          <BeerList beers={pageData} />
+          {/* <PaginationFooter
+            
+            
+            max_pages={max_pages}
+          /> */}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }

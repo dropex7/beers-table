@@ -1,20 +1,20 @@
 import React from "react";
-import { Grid, OutlinedInput } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 
 const FilterInputComponent = (props) => {
   return (
     <div>
       <Grid item>
-        <OutlinedInput
-          id="outlined-adornment-weight"
+        <TextField
+          id="standard-search"
+          variant="outlined"
+          label={`Type ${props.filterInput.name}...`}
+          type="search"
           value={props.filterInput.value}
           onChange={(event) =>
             props.setValue(event.target.value, props.filterInput.name)
           }
-          aria-describedby="outlined-weight-helper-text"
-          labelWidth={0}
         />
-        {props.filterInput.value}
       </Grid>
     </div>
   );

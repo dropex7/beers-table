@@ -19,8 +19,4 @@ export default class BackendProvider {
     }
     return this.fetchData(`${this.baseUrl}beers`);
   }
-
-  async getBeersByParams(params) {
-    return this.fetchData(`${this.baseUrl}beers?${params}`);
-  }
 }
