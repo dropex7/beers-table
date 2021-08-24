@@ -24,9 +24,12 @@ const IngredientsList = (props) => {
   const classes = useStyles();
   return (
     <List dense={true} className={classes.cardList}>
-      {props.ingredients.map((ingredient) => {
+      {props.ingredients.map((ingredient, index) => {
         return (
-          <div className={classes.cardListItemContainer}>
+          <div
+            className={classes.cardListItemContainer}
+            key={props.title + ingredient.name + index}
+          >
             <ListItem
               alignItems="flex-start"
               className={classes.ingredientsCardListElement}

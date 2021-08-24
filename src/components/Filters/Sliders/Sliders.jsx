@@ -7,11 +7,13 @@ export default function Sliders(props) {
       {props.sliderElements.map((sliderEl) => {
         return (
           <SliderComponent
+            key={sliderEl.name}
             name={sliderEl.name}
+            title={sliderEl.title}
             value={sliderEl.value}
             max={sliderEl.max}
             step={sliderEl.step}
-            setValue={props.handleChangeSlider}
+            handleChangeSlider={props.handleChangeSlider}
             valueText={(value) => value}
           />
         );

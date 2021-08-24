@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "1fr 5fr",
     gridColumnGap: "60px",
-    margin: "100px 0px 10px 20px",
+    margin: "80px 0px 10px 20px",
     height: "100%",
   },
 });
@@ -21,47 +21,42 @@ const useStyles = makeStyles({
 export default function TableManager() {
   const classes = useStyles();
   const [filteredData, setFilteredData] = useState([]);
-  const [pageData, setPageData] = useState([]);
+  const [filterParams, setFilterParams] = useState("");
   const [searchField, setSearchField] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-
-  const max_pages = Math.round(filteredData.length / pageSize);
+  const [pageSize, setPageSize] = useState(10);
+  const [isNextPageExists, setIsNextPageExists] = useState(true);
 
   function submitFilters(params) {
     setPageNumber(1);
-    const queryRequest = params.reduce(
-      (request, param) => request + `&${param}`
-    );
-    backendProvider.getBeersByParams(queryRequest).then((beers) => {
-      setFilteredData(beers);
-    });
+    setFilterParams(params);
+  }
+
+  function handleChangePageSize(value) {
+    setPageNumber(1);
+    setPageSize(value);
   }
 
   function handleChangeSearchField(value) {
+    setPageNumber(1);
     setSearchField(value.trim());
   }
 
   useEffect(() => {
-    setPageNumber(1);
-    backendProvider.getBeersByName(searchField).then((beers) => {
-      setFilteredData(beers);
-    });
-  }, [searchField]);
-
-  useEffect(() => {
-    backendProvider.getBeers().then((beers) => {
-      setFilteredData(beers);
-    });
-  }, []);
-
-  useEffect(() => {
-    function sliceArrayForPagination() {
-      const paginationValue = pageNumber * pageSize;
-      return filteredData.slice(paginationValue - pageSize, paginationValue);
-    }
-    setPageData(sliceArrayForPagination());
-  }, [pageNumber, pageSize, filteredData]);
+    backendProvider
+      .getBeers(searchField, filterParams, pageNumber, pageSize)
+      .then((beers) => {
+        if (beers.length > 0) {
+          setFilteredData(beers);
+          if (beers.length === pageSize) {
+            setIsNextPageExists(true);
+          }
+        } else {
+          setIsNextPageExists(false);
+          setPageNumber(pageNumber > 1 ? pageNumber - 1 : pageNumber);
+        }
+      });
+  }, [searchField, pageNumber, pageSize, filterParams]);
 
   return (
     <Grid container spacing={1} className={classes.app}>
@@ -71,20 +66,17 @@ export default function TableManager() {
       />
       <Grid container direction="column" className={classes.wrapperTable}>
         <Filters
-          onChangePageSize={setPageSize}
+          onChangePageSize={handleChangePageSize}
           onChangePageNumber={setPageNumber}
+          onChangeNextPageExists={setIsNextPageExists}
           pageSize={pageSize}
           pageNumber={pageNumber}
           submitFilters={submitFilters}
           className={classes.table_filters}
+          isNextPageExists={isNextPageExists}
         />
         <Grid container item xs={12} spacing={3}>
-          <BeerList beers={pageData} />
-          {/* <PaginationFooter
-            
-            
-            max_pages={max_pages}
-          /> */}
+          <BeerList beers={filteredData} />
         </Grid>
       </Grid>
     </Grid>

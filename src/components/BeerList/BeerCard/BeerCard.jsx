@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import BeerSpecifications from "./BeerSpecifications/BeerSpecifications";
-import { DEFAULT_IMAGE_SRC } from "../../../ConstVariables/defaultImage";
+import { DEFAULT_IMAGE_SRC } from "../../../CONST_VARS/defaultImgSrc";
 
 const useStyles = makeStyles({
   Card: {

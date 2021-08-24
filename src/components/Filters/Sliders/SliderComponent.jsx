@@ -4,10 +4,12 @@ import { Grid, Typography, Slider } from "@material-ui/core";
 export default function SliderComponent(props) {
   return (
     <Grid item>
-      <Typography>{props.name}</Typography>
+      <Typography>{props.title}</Typography>
       <Slider
         value={props.value}
-        onChange={(e, newValue) => props.setValue(newValue, props.name)}
+        onChange={(e, newValue) =>
+          props.handleChangeSlider(newValue, props.name)
+        }
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         getAriaValueText={props.valueText}

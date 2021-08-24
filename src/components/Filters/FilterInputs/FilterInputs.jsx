@@ -7,6 +7,7 @@ export default function FilterInputs(props) {
       {props.filterInputs.map((filterInput) => {
         return (
           <FilterInputComponent
+            key={filterInput.name}
             filterInput={filterInput}
             setValue={props.handleChangeInput}
           />

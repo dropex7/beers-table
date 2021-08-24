@@ -7,13 +7,13 @@ import { Grid } from "@material-ui/core";
 
 // })
 
-export default function DataList(props) {
+export default function BeerList(props) {
   return (
     <Grid container spacing={2} fixed>
       {props.beers.map((beer) => {
         return (
-          <Grid container item xs={4}>
-            <BeerCard key={beer.id} beer={beer} />
+          <Grid key={beer.id} container item xs={4}>
+            <BeerCard beer={beer} />
           </Grid>
         );
       })}

@@ -4,17 +4,37 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   selectInput: {
-    height: "40px",
-    marginLeft: "5px",
+    height: "30px",
+  },
+  paginationContainer: {
+    marginBottom: "7px",
   },
 });
 
 const Pagination = (props) => {
   const classes = useStyles();
+
+  const handleChangePageToPrev = () => {
+    props.onChangePageNumber(props.pageNumber - 1);
+    props.onChangeNextPageExists(true);
+  };
+
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center">
+    <Grid
+      container
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      className={classes.paginationContainer}
+    >
       <Grid item xs={4}>
-        <Button variant="contained" color="primary">
+        <Button
+          disabled={props.pageNumber === 1}
+          onClick={handleChangePageToPrev}
+          variant="contained"
+          color="primary"
+          size="small"
+        >
           Prev
         </Button>
       </Grid>
@@ -27,15 +47,22 @@ const Pagination = (props) => {
           value={props.pageSize}
           onChange={(event) => props.onChangePageSize(event.target.value)}
         >
-          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={30}>30</MenuItem>
+          <MenuItem value={50}>50</MenuItem>
+          <MenuItem value={80}>80</MenuItem>
         </Select>
-        {props.pageSize}
       </Grid>
       <Grid item xs={4}>
-        <Button variant="contained" color="primary">
+        <Button
+          onClick={() => props.onChangePageNumber(props.pageNumber + 1)}
+          variant="contained"
+          color="primary"
+          size="small"
+          disabled={!props.isNextPageExists}
+        >
           Next
         </Button>
       </Grid>

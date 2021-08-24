@@ -4,19 +4,21 @@ export default class BackendProvider {
   }
 
   async fetchData(url) {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  }
-
-  async getBeers() {
-    return this.fetchData(`${this.baseUrl}beers`);
-  }
-
-  async getBeersByName(name) {
-    if (name !== "") {
-      return this.fetchData(`${this.baseUrl}beers?beer_name=${name}`);
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      throw new Error(e.message);
     }
-    return this.fetchData(`${this.baseUrl}beers`);
+  }
+
+  async getBeers(searchField, filters, pageNumber, pageSize) {
+    const staticQueryParams = `page=${pageNumber}&per_page=${pageSize}&${filters}`;
+    if (searchField !== "") {
+      const queryParams = `beer_name=${searchField}&${staticQueryParams}`;
+      return this.fetchData(`${this.baseUrl}beers?${queryParams}`);
+    }
+    return this.fetchData(`${this.baseUrl}beers?${staticQueryParams}`);
   }
 }

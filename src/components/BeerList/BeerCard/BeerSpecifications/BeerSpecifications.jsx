@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 
 const BeerSpecifications = (props) => {
   return (
-    <Grid container direction="row" spacing={1}>
+    <Grid container direction="row">
       <Grid item xs={12}>
         <IngredientsCard title="Foods" ingredients={props.foods} />
       </Grid>
