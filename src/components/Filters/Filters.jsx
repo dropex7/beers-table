@@ -116,7 +116,7 @@ export default function Filters(props) {
           color="primary"
           onClick={submitFiltersWithParams}
         >
-          Применить фильтры
+          Apply Filters
         </Button>
       </Grid>
     </Grid>
