@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import BeerSpecifications from "./BeerSpecifications/BeerSpecifications";
-import { DEFAULT_IMAGE_SRC } from "../../../CONST_VARS/defaultImgSrc";
+import { DEFAULT_IMAGE_SRC } from "../../../devaultVariables/defaultImgSrc";
 
 const useStyles = makeStyles({
   Card: {
@@ -26,7 +26,7 @@ export default function BeerCard(props) {
   const classes = useStyles();
   return (
     <Card variant="outlined" className={classes.Card}>
-      <CardContent lassName={classes.CardContent}>
+      <CardContent className={classes.CardContent}>
         <Grid container direction="row" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <img

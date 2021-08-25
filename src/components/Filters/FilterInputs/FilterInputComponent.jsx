@@ -12,7 +12,7 @@ const FilterInputComponent = (props) => {
   const classes = useStyles();
   return (
     <div>
-      <Grid item spacing={1}>
+      <Grid item>
         <TextField
           id="standard-search"
           className={classes.filterInputTextField}
