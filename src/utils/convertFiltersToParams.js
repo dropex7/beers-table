@@ -23,9 +23,24 @@ function convertSlidersToQueryParams(sliderParams) {
   });
 }
 
-export default function convertFiltersToParams(sliderParams, inputParams) {
-  let resultParams = "";
+function convertDateToQueryParams(beforeDate, afterDate) {
+  const queryBeforeDateParams = `brewed_before=${
+    beforeDate.getUTCMonth() + 1
+  }-20${beforeDate.getYear() - 100}`;
+  const queryAfterDateParams = `brewed_after=${afterDate.getUTCMonth() + 1}-20${
+    afterDate.getYear() - 100
+  }`;
+  return `${queryBeforeDateParams}&${queryAfterDateParams}`;
+}
 
+export default function convertFiltersToParams(
+  sliderParams,
+  inputParams,
+  beforeDate,
+  afterDate
+) {
+  let resultParams = "";
+  resultParams += convertDateToQueryParams(beforeDate, afterDate);
   convertSlidersToQueryParams(sliderParams).forEach((slParam) => {
     resultParams += `${slParam[0]}&`;
     resultParams += slParam[1] ? `${slParam[1]}&` : "";

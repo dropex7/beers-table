@@ -3,7 +3,7 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Sliders from "./Sliders/Sliders";
 import FilterInputs from "./FilterInputs/FilterInputs";
-import Pagination from "./../Pagination/Pagination";
+import Pagination from "./Pagination/Pagination";
 import DateFilters from "./DateFilters/DateFilters";
 import createNewArrayOfObjects from "../../utils/createNewArrayOfObjects";
 import convertFiltersToParams from "../../utils/convertFiltersToParams";
@@ -16,6 +16,8 @@ const useStyles = makeStyles({
 
 export default function Filters(props) {
   const classes = useStyles();
+  const [beforeDate, setBeforeDate] = React.useState(new Date());
+  const [afterDate, setAfterDate] = React.useState(new Date(2007, 3));
   const [sliderElements, setSliderElements] = React.useState([
     {
       name: "abv",
@@ -61,7 +63,14 @@ export default function Filters(props) {
   };
 
   function submitFiltersWithParams() {
-    props.submitFilters(convertFiltersToParams(sliderElements, filterInputs));
+    props.submitFilters(
+      convertFiltersToParams(
+        sliderElements,
+        filterInputs,
+        beforeDate,
+        afterDate
+      )
+    );
   }
 
   return (
@@ -82,7 +91,12 @@ export default function Filters(props) {
         ></Pagination>
       </Grid>
       <Grid item xs={12}>
-        <DateFilters />
+        <DateFilters
+          beforeDate={beforeDate}
+          afterDate={afterDate}
+          handleChangeBeforeDate={setBeforeDate}
+          handleChangeAfterDate={setAfterDate}
+        />
       </Grid>
       <Grid item xs={12}>
         <Sliders

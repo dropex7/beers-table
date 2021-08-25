@@ -2,24 +2,23 @@ import React from "react";
 import { Grid, Divider } from "@material-ui/core";
 import DateFilterComponent from "./DateFilterComponents/DateFilterComponent";
 
-const DateFilters = () => {
-  const [beforeDate, setBeforeDate] = React.useState(new Date());
-  const [afterDate, setAfterDate] = React.useState(new Date());
-  console.log(beforeDate);
-  console.log(afterDate);
-
+const DateFilters = (props) => {
   return (
     <Grid container direction="column">
       <Divider style={{ marginBottom: "5px" }} />
       <DateFilterComponent
-        date={beforeDate}
+        date={props.beforeDate}
         title="Brewed before"
-        handleChangeDate={setBeforeDate}
+        minDate={new Date(2007, 5)}
+        maxDate={new Date()}
+        handleChangeDate={props.handleChangeBeforeDate}
       />
       <DateFilterComponent
-        date={afterDate}
+        date={props.afterDate}
         title="Brewed after"
-        handleChangeDate={setAfterDate}
+        minDate={new Date(2007, 3)}
+        maxDate={new Date(2016, 5)}
+        handleChangeDate={props.handleChangeAfterDate}
       />
       <Divider style={{ marginTop: "5px" }} />
     </Grid>

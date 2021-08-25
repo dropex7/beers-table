@@ -11,6 +11,7 @@ const DateFilterComponent = (props) => {
         direction="row"
         alignItems="center"
         justifyContent="center"
+        style={{ height: "30px" }}
       >
         <Grid item xs={6}>
           <Typography>{props.title}</Typography>
@@ -20,7 +21,10 @@ const DateFilterComponent = (props) => {
             onChange={props.handleChangeDate}
             format="MM-yyyy"
             disableCalendar={true}
+            clearIcon={null}
             value={props.date}
+            maxDate={props.maxDate}
+            minDate={props.minDate}
           />
         </Grid>
       </Grid>
