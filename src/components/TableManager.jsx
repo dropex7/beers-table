@@ -6,7 +6,7 @@ import BackendProvider from "../utils/BackendProvider";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const backendProvider = new BackendProvider("https://api.punkapi.com/v2/");
+const backendProvider = new BackendProvider(process.env.REACT_APP_API_URL);
 
 const useStyles = makeStyles({
   wrapperTable: {
