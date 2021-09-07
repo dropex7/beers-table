@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   },
 });
 
-const FilterInputComponent = (props) => {
+const FilterInputComponent = ({ filterInput, setValue }) => {
   const classes = useStyles();
   return (
     <div>
@@ -17,12 +17,10 @@ const FilterInputComponent = (props) => {
           id="standard-search"
           className={classes.filterInputTextField}
           variant="outlined"
-          label={`Type ${props.filterInput.name}...`}
+          label={`Type ${filterInput.name}...`}
           type="search"
-          value={props.filterInput.value}
-          onChange={(event) =>
-            props.setValue(event.target.value, props.filterInput.name)
-          }
+          value={filterInput.value}
+          onChange={(event) => setValue(event.target.value, filterInput.name)}
         />
       </Grid>
     </div>

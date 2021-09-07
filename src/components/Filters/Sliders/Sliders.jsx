@@ -1,10 +1,10 @@
 import React from "react";
 import SliderComponent from "./SliderComponent";
 
-export default function Sliders(props) {
+export default function Sliders({ sliderElements, handleChangeSlider }) {
   return (
     <div>
-      {props.sliderElements.map((sliderEl) => {
+      {sliderElements.map((sliderEl) => {
         return (
           <SliderComponent
             key={sliderEl.name}
@@ -13,7 +13,7 @@ export default function Sliders(props) {
             value={sliderEl.value}
             max={sliderEl.max}
             step={sliderEl.step}
-            handleChangeSlider={props.handleChangeSlider}
+            handleChangeSlider={handleChangeSlider}
             valueText={(value) => value}
           />
         );

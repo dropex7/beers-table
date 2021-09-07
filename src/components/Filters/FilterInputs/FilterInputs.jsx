@@ -1,15 +1,15 @@
 import React from "react";
 import FilterInputComponent from "./FilterInputComponent";
 
-export default function FilterInputs(props) {
+export default function FilterInputs({ filterInputs, handleChangeInput }) {
   return (
     <div>
-      {props.filterInputs.map((filterInput) => {
+      {filterInputs.map((filterInput) => {
         return (
           <FilterInputComponent
             key={filterInput.name}
             filterInput={filterInput}
-            setValue={props.handleChangeInput}
+            setValue={handleChangeInput}
           />
         );
       })}

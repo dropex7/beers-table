@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import BeerList from "./BeerList/BeerList";
 import SearchField from "./Search/SearchField";
 import Filters from "./Filters/Filters";
-import BackendProvider from "../utils/BackendProvider";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-const backendProvider = new BackendProvider(process.env.REACT_APP_API_URL);
+import { backendProvider } from "../constans/CONSTS";
 
 const useStyles = makeStyles({
   wrapperTable: {
@@ -52,6 +50,7 @@ export default function TableManager() {
             setIsNextPageExists(true);
           }
         } else {
+          setFilteredData([]);
           setIsNextPageExists(false);
           setPageNumber(pageNumber > 1 ? pageNumber - 1 : pageNumber);
         }

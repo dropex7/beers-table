@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import BeerSpecifications from "./BeerSpecifications/BeerSpecifications";
-import { DEFAULT_IMAGE_SRC } from "../../../devaultVariables/defaultImgSrc";
+import { DEFAULT_IMAGE_SRC } from "../../../constans/CONSTS";
 
 const useStyles = makeStyles({
   Card: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BeerCard(props) {
+export default function BeerCard({ beer }) {
   const classes = useStyles();
   return (
     <Card variant="outlined" className={classes.Card}>
@@ -30,21 +30,19 @@ export default function BeerCard(props) {
         <Grid container direction="row" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <img
-              src={
-                props.beer.image_url ? props.beer.image_url : DEFAULT_IMAGE_SRC
-              }
-              alt={props.beer.name}
+              src={beer.image_url ? beer.image_url : DEFAULT_IMAGE_SRC}
+              alt={beer.name}
               className={classes.CardImg}
             />
           </Grid>
           <Grid item xs={7}>
-            <BeerDescription beer={props.beer} />
+            <BeerDescription beer={beer} />
           </Grid>
         </Grid>
         <Grid container direction="row">
           <BeerSpecifications
-            foods={props.beer.food_pairing}
-            ingredients={props.beer.ingredients}
+            foods={beer.food_pairing}
+            ingredients={beer.ingredients}
           />
         </Grid>
       </CardContent>

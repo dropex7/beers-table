@@ -14,7 +14,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Filters(props) {
+export default function Filters({
+  pageNumber,
+  pageSize,
+  isNextPageExists,
+  submitFilters,
+  onChangeNextPageExists,
+  onChangePageSize,
+  onChangePageNumber,
+}) {
   const classes = useStyles();
   const [beforeDate, setBeforeDate] = React.useState(new Date());
   const [afterDate, setAfterDate] = React.useState(new Date(2007, 3));
@@ -63,7 +71,15 @@ export default function Filters(props) {
   };
 
   function submitFiltersWithParams() {
-    props.submitFilters(
+    console.log(
+      convertFiltersToParams(
+        sliderElements,
+        filterInputs,
+        beforeDate,
+        afterDate
+      )
+    );
+    submitFilters(
       convertFiltersToParams(
         sliderElements,
         filterInputs,
@@ -77,17 +93,17 @@ export default function Filters(props) {
     <Grid container direction="row" className={classes.filtersContainer}>
       <Grid item xs={12}>
         <Typography>
-          <i>Page:</i> <b>{props.pageNumber}</b>
+          <i>Page:</i> <b>{pageNumber}</b>
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Pagination
-          onChangePageSize={props.onChangePageSize}
-          onChangePageNumber={props.onChangePageNumber}
-          pageSize={props.pageSize}
-          pageNumber={props.pageNumber}
-          isNextPageExists={props.isNextPageExists}
-          onChangeNextPageExists={props.onChangeNextPageExists}
+          onChangePageSize={onChangePageSize}
+          onChangePageNumber={onChangePageNumber}
+          pageSize={pageSize}
+          pageNumber={pageNumber}
+          isNextPageExists={isNextPageExists}
+          onChangeNextPageExists={onChangeNextPageExists}
         ></Pagination>
       </Grid>
       <Grid item xs={12}>

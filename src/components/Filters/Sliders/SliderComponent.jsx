@@ -1,22 +1,28 @@
 import React from "react";
 import { Grid, Typography, Slider } from "@material-ui/core";
 
-export default function SliderComponent(props) {
+export default function SliderComponent({
+  title,
+  value,
+  handleChangeSlider,
+  name,
+  valueText,
+  step,
+  max,
+}) {
   return (
     <Grid item>
-      <Typography>{props.title}</Typography>
+      <Typography>{title}</Typography>
       <Slider
-        value={props.value}
-        onChange={(e, newValue) =>
-          props.handleChangeSlider(newValue, props.name)
-        }
+        value={value}
+        onChange={(e, newValue) => handleChangeSlider(newValue, name)}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
-        getAriaValueText={props.valueText}
+        getAriaValueText={valueText}
         marks
-        step={props.step}
+        step={step}
         min={0}
-        max={props.max}
+        max={max}
       />
     </Grid>
   );

@@ -3,7 +3,13 @@ import { Grid, Typography } from "@material-ui/core";
 import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 
-const DateFilterComponent = (props) => {
+const DateFilterComponent = ({
+  title,
+  date,
+  maxDate,
+  minDate,
+  handleChangeDate,
+}) => {
   return (
     <Grid item xs={12}>
       <Grid
@@ -14,17 +20,17 @@ const DateFilterComponent = (props) => {
         style={{ height: "30px" }}
       >
         <Grid item xs={6}>
-          <Typography>{props.title}</Typography>
+          <Typography>{title}</Typography>
         </Grid>
         <Grid item xs={6}>
           <DatePicker
-            onChange={props.handleChangeDate}
+            onChange={handleChangeDate}
             format="MM-yyyy"
             disableCalendar={true}
             clearIcon={null}
-            value={props.date}
-            maxDate={props.maxDate}
-            minDate={props.minDate}
+            value={date}
+            maxDate={maxDate}
+            minDate={minDate}
           />
         </Grid>
       </Grid>

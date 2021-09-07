@@ -1,14 +1,14 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 
-const BeerDescription = (props) => {
+const BeerDescription = ({ beer }) => {
   const beerDescription = [
-    { title: "", value: props.beer.name },
-    { title: "ID", value: props.beer.id },
-    { title: "Alcohol by Volume", value: props.beer.abv },
-    { title: "IBU", value: props.beer.ibu },
-    { title: "EBC", value: props.beer.ebc },
-    { title: "Yeast", value: props.beer.ingredients.yeast },
+    { title: "", value: beer.name },
+    { title: "ID", value: beer.id },
+    { title: "Alcohol by Volume", value: beer.abv },
+    { title: "IBU", value: beer.ibu },
+    { title: "EBC", value: beer.ebc },
+    { title: "Yeast", value: beer.ingredients.yeast },
   ];
   return (
     <Grid container direction="column" alignItems="flex-start">

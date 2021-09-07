@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SearchField(props) {
+export default function SearchField({ onFilterData }) {
   const classes = useStyles();
   return (
     <AppBar position="fixed">
@@ -32,7 +32,7 @@ export default function SearchField(props) {
             className={classes.searchInput}
             minLength={0}
             debounceTimeout={300}
-            onChange={(event) => props.onFilterData(event.target.value)}
+            onChange={(event) => onFilterData(event.target.value)}
           />
         </Grid>
       </Toolbar>

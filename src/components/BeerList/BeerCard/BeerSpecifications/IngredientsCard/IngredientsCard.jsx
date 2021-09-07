@@ -17,16 +17,16 @@ const useStyles = makeStyles({
   },
 });
 
-const IngredientsCard = (props) => {
+const IngredientsCard = ({ title, ingredients }) => {
   const classes = useStyles();
   return (
     <Card variant="outlined" className={classes.ingredientsCard}>
       <CardContent className={classes.ingredientsCardContent}>
         <Typography>
-          <b>{props.title}: </b>
+          <b>{title}: </b>
         </Typography>
         <Divider />
-        <IngredientsList ingredients={props.ingredients} title={props.title} />
+        <IngredientsList ingredients={ingredients} title={title} />
       </CardContent>
     </Card>
   );

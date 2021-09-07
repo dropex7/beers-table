@@ -11,12 +11,19 @@ const useStyles = makeStyles({
   },
 });
 
-const Pagination = (props) => {
+const Pagination = ({
+  pageNumber,
+  pageSize,
+  onChangePageSize,
+  onChangePageNumber,
+  isNextPageExists,
+  onChangeNextPageExists,
+}) => {
   const classes = useStyles();
 
   const handleChangePageToPrev = () => {
-    props.onChangePageNumber(props.pageNumber - 1);
-    props.onChangeNextPageExists(true);
+    onChangePageNumber(pageNumber - 1);
+    onChangeNextPageExists(true);
   };
 
   return (
@@ -29,7 +36,7 @@ const Pagination = (props) => {
     >
       <Grid item xs={4}>
         <Button
-          disabled={props.pageNumber === 1}
+          disabled={pageNumber === 1}
           onClick={handleChangePageToPrev}
           variant="contained"
           color="primary"
@@ -44,8 +51,8 @@ const Pagination = (props) => {
           id="demo-simple-select-helper"
           variant="outlined"
           className={classes.selectInput}
-          value={props.pageSize}
-          onChange={(event) => props.onChangePageSize(event.target.value)}
+          value={pageSize}
+          onChange={(event) => onChangePageSize(event.target.value)}
         >
           <MenuItem value={6}>6</MenuItem>
           <MenuItem value={10}>10</MenuItem>
@@ -57,11 +64,11 @@ const Pagination = (props) => {
       </Grid>
       <Grid item xs={4}>
         <Button
-          onClick={() => props.onChangePageNumber(props.pageNumber + 1)}
+          onClick={() => onChangePageNumber(pageNumber + 1)}
           variant="contained"
           color="primary"
           size="small"
-          disabled={!props.isNextPageExists}
+          disabled={!isNextPageExists}
         >
           Next
         </Button>

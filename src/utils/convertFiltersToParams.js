@@ -28,9 +28,11 @@ function convertDateToQueryParams(beforeDate, afterDate) {
     beforeDate.getUTCMonth() + 1
   }-20${beforeDate.getYear() - 100}`;
   const queryAfterDateParams = `brewed_after=${afterDate.getUTCMonth() + 1}-20${
-    afterDate.getYear() - 100
+    afterDate.getYear() - 100 > 9
+      ? afterDate.getYear() - 100
+      : `0${afterDate.getYear() - 100}`
   }`;
-  return `${queryBeforeDateParams}&${queryAfterDateParams}`;
+  return `${queryBeforeDateParams}&${queryAfterDateParams}&`;
 }
 
 export default function convertFiltersToParams(
